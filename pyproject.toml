@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "ml-zoomcamp"
+version = "0.1.0"
+description = ""
+authors = ["JChien <jeffchien13@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.23.1"
+pandas = "^1.4.3"
+scikit-learn = "^1.1.1"
+seaborn = "^0.11.2"
+jupyter = "^1.0.0"
+tensorflow-macos = "^2.9.2"
+tensorflow-metal = "^0.5.0"
+matplotlib = "^3.5.2"
+xgboost = "^1.6.1"
+pyarrow = "^8.0.0"
+s3fs = "^2022.7.1"
+kaggle = "^1.5.12"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
