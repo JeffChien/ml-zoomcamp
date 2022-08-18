@@ -1,3 +1,9 @@
 {
-  "notebook.output.textLineLimit": 500
+  "notebook.output.textLineLimit": 500,
+  "python.autoComplete.extraPaths": [
+    "gen/py/proto"
+  ],
+  "python.analysis.extraPaths": [
+    "gen/py/proto"
+  ]
 }
