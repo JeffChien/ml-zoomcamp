@@ -1,0 +1,20 @@
+FROM python:3.9.13-slim as stage01
+
+
+ENV PATH="${PATH}:/root/.local/bin"
+
+RUN pip install poetry --user
+RUN poetry config virtualenvs.create false
+
+FROM stage01 as stage02
+RUN mkdir /app
+COPY inference/pyproject.toml /app
+WORKDIR /app
+
+RUN poetry install
+
+FROM stage02 as stage03
+
+ADD gen /app/gen
+ENV PYTHONPATH="${PYTHONPATH}:/app:/app/gen/py"
+CMD [ "python", "inference.py" ]

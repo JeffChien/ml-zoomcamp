@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  inference-dev:
+    build:
+      context: .
+      dockerfile: ./inference/dockerfile
+    command: watchmedo auto-restart --recursive --pattern='*.py' --directory='.' python -- inference.py
+    ports:
+      - 9527:9527
+    environment:
+      - MODEL_PATH=/app/model/car_price.joblib
+    volumes:
+      - ./inference:/app
+      - ./gen:/app/gen
+      - ./ch2/model:/app/model
+
+  inference-ch2:
+    build:
+      context: .
+      dockerfile: ./inference/dockerfile
+    environment:
+      - MODEL_PATH=/app/model/car_price.joblib
+    volumes:
+      - ./inference:/app
+      - ./gen:/app/gen
+      - ./ch2/model:/app/model
+
+  inference-gateway:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    environment:
+      - CH2_HOST=inference-ch2:9527
+    ports:
+      - 8000:8000
+    # volumes:
+    #   - .:/app
