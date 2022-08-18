@@ -1,0 +1,10 @@
+syntax = "proto3";
+package mlzoomcamp;
+
+import "proto/input.proto";
+import "proto/output.proto";
+
+service Inference {
+  rpc predict(Input) returns (Output) {}
+  rpc predict_proba(Input) returns (Output) {}
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package mlzoomcamp;
+
+message Input {
+  repeated int64 shape = 1 [ packed = true ];
+  repeated float data = 2 [ packed = true ];
+}

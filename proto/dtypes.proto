@@ -1,0 +1,8 @@
+syntax = "proto3";
+package mlzoomcamp;
+
+message BytesList { repeated bytes value = 1; }
+
+message FloatList { repeated float value = 1 [ packed = true ]; }
+
+message Int64List { repeated int64 value = 1 [ packed = true ]; }
