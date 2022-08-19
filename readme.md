@@ -11,7 +11,7 @@ try to mimic how tensorflow serving, a simpler inference server inside [inferenc
 currently ch2 has a working demo. the plan is to have
 
 - [x] a docker compose version
-- [ ] a k8s version
+- [x] a k8s version
 - [ ] a kserve version
 - [ ] a aws version (maybe)
 
