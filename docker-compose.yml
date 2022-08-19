@@ -23,12 +23,9 @@ services:
       - ./ch2/model:/app/model
 
   inference-ch2:
-    image: ml-zoomcamp_inference-server:latest
-    environment:
-      - MODEL_PATH=/app/model/car_price.joblib
-      - MODEL_FRAMEWORK=sklearn
-    volumes:
-      - ./ch2/model:/app/model
+    build:
+      context: ./ch2
+      dockerfile: ./Dockerfile
 
   inference-gateway:
     build:
