@@ -1,34 +1,39 @@
 version: "3.9"
 services:
-  inference-dev:
+  inference-server:
     build:
       context: .
-      dockerfile: ./inference/dockerfile
+      dockerfile: ./inference/Dockerfile
+    environment:
+      - MODEL_PATH=/app/model/car_price.joblib
+      - MODEL_FRAMEWORK=sklearn
+    volumes:
+      - ./ch2/model:/app/model
+  inference-dev:
+    image: ml-zoomcamp_inference-server:latest
     command: watchmedo auto-restart --recursive --pattern='*.py' --directory='.' python -- inference.py
     ports:
       - 9527:9527
     environment:
       - MODEL_PATH=/app/model/car_price.joblib
+      - MODEL_FRAMEWORK=sklearn
     volumes:
       - ./inference:/app
       - ./gen:/app/gen
       - ./ch2/model:/app/model
 
   inference-ch2:
-    build:
-      context: .
-      dockerfile: ./inference/dockerfile
+    image: ml-zoomcamp_inference-server:latest
     environment:
       - MODEL_PATH=/app/model/car_price.joblib
+      - MODEL_FRAMEWORK=sklearn
     volumes:
-      - ./inference:/app
-      - ./gen:/app/gen
       - ./ch2/model:/app/model
 
   inference-gateway:
     build:
       context: .
-      dockerfile: ./dockerfile
+      dockerfile: ./Dockerfile
     environment:
       - CH2_HOST=inference-ch2:9527
     ports:
