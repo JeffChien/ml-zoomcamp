@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ch2-inference-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ch2-inference-server
+  template:
+    metadata:
+      labels:
+        app: ch2-inference-server
+    spec:
+      containers:
+        - name: ch2-inference-server
+          image: ml-zoomcamp_inference-ch2
+          imagePullPolicy: Never
+          env:
+            - name: MODEL_PATH
+              value: "/app/model/car_price.joblib"
+            - name: MODEL_FRAMEWORK
+              value: sklearn
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9527
