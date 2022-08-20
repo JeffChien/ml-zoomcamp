@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: ml-zoomcamp_inference-gateway
-        imagePullPolicy: Never
+        image: ml-zoomcamp_inference-gateway:latest
+        imagePullPolicy: IfNotPresent
         env:
           - name: CH2_HOST
             value: ch2-inference-server.default.svc.cluster.local:9527

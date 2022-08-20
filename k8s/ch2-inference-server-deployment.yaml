@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: ch2-inference-server
-          image: ml-zoomcamp_inference-ch2
-          imagePullPolicy: Never
+          image: ml-zoomcamp_inference-ch2:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: MODEL_PATH
               value: "/app/model/car_price.joblib"
