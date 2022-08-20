@@ -1,5 +1,7 @@
-from crypt import methods
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask import jsonify
+from flask import request
+
 from ch2 import api as ch2_api
 
 app = Flask(__name__)
