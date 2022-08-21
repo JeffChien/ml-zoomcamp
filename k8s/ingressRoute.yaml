@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-prefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /ml-zoomcamp
+    forceSlash: false
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gateway
+  labels:
+    name: gateway
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/ml-zoomcamp`)
+      kind: Rule
+      middlewares:
+        - name: strip-prefix
+      services:
+        - name: gateway
+          port: 8000
