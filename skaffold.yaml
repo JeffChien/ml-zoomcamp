@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: ml-zoomcamp
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: ml-zoomcamp_inference-server
+    context: .
+    docker:
+      dockerfile: "inference/Dockerfile"
+  - image: ml-zoomcamp_inference-ch2
+    context: ch2
+    docker:
+      dockerfile: Dockerfile
+  - image: ml-zoomcamp_inference-gateway
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - k8s/ch2-inference-server-deployment.yaml
+    - k8s/ch2-inference-server-service.yaml
+    - k8s/gateway-deployment.yaml
+    - k8s/gateway-service.yaml
+    - k8s/ingressRoute.yaml
